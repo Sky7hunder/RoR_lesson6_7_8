@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<div class="post">
+  <strong class="post_title">
+    <%= @post.title %>
+  </strong>
+
+  <p>
+    <%= @post.body %>
+  </p>
+
+  <p>
+    <%= @post.tags %>
+  </p>
+  <div class="post_menu">
+    <ul class="control_list">
+      <% if current_user && (current_user ==  User.find(@post.user_id)) %>
+        <li>
+          <%= link_to 'Edit', edit_post_path(@post) %>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to 'Back', posts_path %>
+      </li>
+    </ul>
+    <%= render partial: 'voting'%>
+  </div>
+</div>
+<div clas="well">
+  <% if current_user %>
+    <%= form_for [@post, Comment.new], remote: true, :html => {:role=> 'form'} do |f| %>
+      <%= f.hidden_field :parent_id %>
+      <p>
+        <%= f.label :body, "New comment" %><br/>
+      <div class="form-group">
+        <%= f.text_area :body, class: 'form-control'%>
+      </div>
+      </p>
+      <p><%= f.submit "Add comment", class: 'btn btn-primary' %></p>
+    <% end %>
+  <% end %>
+</div>
+<div class="comments">
+  <hr>
+  <h2>Comments</h2>
+  <%= nested_comments @post.comments.arrange %>
+</div>

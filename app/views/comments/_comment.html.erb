@@ -1,0 +1,23 @@
+    <%= div_for comment do %>
+      <div class="pull-left">
+        <%= image_tag avatar_url(comment.user), height: '64', width: '64' , class: 'media-object'%>
+      </div>
+      <p>
+        <strong>
+          Posted by: <%= comment.user.name %>
+        </strong>
+        <%= time_ago_in_words(comment.created_at) %> ago
+        <br/>
+        <%= comment.body %>
+      </p>
+      <% if (comment.user == current_user) %>
+        <% if (Time.now - comment.created_at) <= 1.hour %>
+          <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-comment', remote: true %>
+        <% else %>
+          <span class="delete-comment-disabled">Destroy</span>
+        <% end %>
+      <% end %>
+      <% if current_user %>
+        <%= link_to "Reply", new_post_comment_path(parent_id: comment.id, post_id: @post.id ), remote: true, id: "reply_comment_#{comment.id}" %>
+      <% end %>
+    <% end %>

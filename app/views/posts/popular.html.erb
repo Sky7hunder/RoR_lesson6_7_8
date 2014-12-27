@@ -1,0 +1,29 @@
+<h1>Popular posts</h1>
+
+<ul class="posts">
+  <% @posts.each do |post| %>
+    <li>
+      <div class="post_header">
+        <span class="post_title"><%= post.title %></span>
+        <span class="author"><%= User.find(post.user_id).name %><%= image_tag avatar_url(post.user) %></span>
+      </div>
+      <p><%= post.body %></p>
+      <span><%= post.tags %></span>
+      <ul class="control_list">
+        <li><%= link_to 'Show', post %></li>
+        <% if current_user && (current_user ==  User.find(post.user_id)) %>
+          <li><%= link_to 'Edit', edit_post_path(post) %></li>
+          <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+<br>
+
+<% if current_user %>
+  <span><%= link_to 'New Post', new_post_path, class: 'bold link_button font-size' %> </span>
+<% else %>
+  <span>Login to create post</span>
+<% end %>
+

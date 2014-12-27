@@ -1,0 +1,11 @@
+<%= form_for [@post, Comment.new], remote: true, :html => {:role=> 'form', id: 'reply_new_comment'} do |f| %>
+  <%= f.hidden_field :post_id, value: @comment.post_id %>
+  <%= f.hidden_field :parent_id, value: params[:parent_id] %>
+  <p>
+    <%= f.label :body, "New comment" %><br/>
+  <div class="form-group">
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+  </p>
+  <p><%= f.submit "Add comment", class: 'btn btn-primary' %></p>
+<% end %>

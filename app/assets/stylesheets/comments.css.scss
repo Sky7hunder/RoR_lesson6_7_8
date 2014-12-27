@@ -1,0 +1,42 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.comments{
+  color: rgb(176, 146, 146);
+
+  hr {
+    border-color: rgb(213, 123, 5);
+  }
+
+  h2{
+    color: #7e4c5d;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  textarea#comment_body {
+    width: 620px;
+    height: 80px;
+  }
+
+  button.btn.btn-primary {
+    padding: 36px 7px;
+    background-color: #301b1f;
+    border: none;
+    color: #d57b05;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    float: right;
+  }
+
+  .delete-comment-disabled{
+    color: gray;
+  }
+
+  #comment_body {
+    width: 690px;
+    height: 70px;
+  }
+}
